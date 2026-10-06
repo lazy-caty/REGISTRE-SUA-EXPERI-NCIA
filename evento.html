@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -10,6 +11,55 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ======================================
+           AJUSTES DA CÂMERA
+        ====================================== */
+
+        .camera-container {
+            position: relative;
+        }
+
+        /* Visualização da câmera */
+        #camera {
+            width: 100%;
+            display: block;
+            transform: scaleX(-1);
+        }
+
+        /* Área dos controles */
+        .controles-camera {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Botão para trocar a câmera:
+           mantém o tamanho original e vai
+           para a esquerda do botão de captura */
+        .botao-trocar-camera {
+            position: absolute;
+            left: 10px;
+            z-index: 2;
+        }
+
+        /* Botão de tirar foto permanece centralizado */
+        .botao-capturar {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Botão fechar permanece à direita */
+        .botao-fechar-camera {
+            position: absolute;
+            right: 10px;
+            z-index: 2;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -157,3 +207,4 @@
 </body>
 
 </html>
+```
