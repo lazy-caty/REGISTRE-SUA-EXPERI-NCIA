@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Evento | Registre sua Experiência</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="pagina-evento">
+
+        <header class="cabecalho-evento">
+
+            <div>
+
+                <p class="subtitulo">
+                    REGISTRE SUA EXPERIÊNCIA
+                </p>
+
+                <h1>
+                    Momentos do evento
+                </h1>
+
+            </div>
+
+            <a
+                href="ranking.html"
+                class="link-ranking"
+            >
+                🏆 Ranking
+            </a>
+
+        </header>
+
+        <section class="introducao-evento">
+
+            <p>
+                Registre os momentos que você achar interessantes
+                e compartilhe sua experiência com todos.
+            </p>
+
+            <button
+                class="botao-camera"
+                id="abrirCamera"
+                type="button"
+            >
+                📷 Registrar momento
+            </button>
+
+        </section>
+
+        <div
+            class="camera-container"
+            id="cameraContainer"
+        >
+
+            <video
+                id="camera"
+                autoplay
+                playsinline
+            ></video>
+
+            <div class="controles-camera">
+
+                <button
+                    class="botao-trocar-camera"
+                    id="trocarCamera"
+                    type="button"
+                >
+                    🔄 Trocar câmera
+                </button>
+
+                <button
+                    class="botao-capturar"
+                    id="capturarFoto"
+                    type="button"
+                >
+                    ●
+                </button>
+
+                <button
+                    class="botao-fechar-camera"
+                    id="fecharCamera"
+                    type="button"
+                >
+                    FECHAR
+                </button>
+
+            </div>
+
+        </div>
+
+        <canvas id="canvasFoto"></canvas>
+
+        <div
+            class="previsualizacao"
+            id="previsualizacao"
+        >
+
+            <img
+                id="fotoPreview"
+                alt="Foto capturada"
+            >
+
+            <div class="acoes-preview">
+
+                <button
+                    id="tirarNovamente"
+                    type="button"
+                >
+                    TIRAR NOVAMENTE
+                </button>
+
+                <button
+                    id="usarFoto"
+                    type="button"
+                >
+                    USAR ESTA FOTO
+                </button>
+
+            </div>
+
+        </div>
+
+        <section class="galeria">
+
+            <div class="titulo-galeria">
+
+                <h2>
+                    Galeria
+                </h2>
+
+                <span>
+                    Momentos compartilhados
+                </span>
+
+            </div>
+
+            <div
+                class="grade-fotos"
+                id="gradeFotos"
+            ></div>
+
+        </section>
+
+    </main>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

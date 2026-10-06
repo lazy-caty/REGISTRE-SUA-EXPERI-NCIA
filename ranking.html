@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Ranking | Registre sua Experiência
+</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+```
+
+</head>
+
+<body>
+
+```
+<main class="pagina-ranking">
+
+    <section class="cabecalho-ranking">
+
+        <p class="subtitulo">
+            REGISTRE SUA EXPERIÊNCIA
+        </p>
+
+        <h1>
+            🏆 Ranking
+        </h1>
+
+        <p class="descricao">
+            Confira quem está registrando mais momentos durante o evento.
+        </p>
+
+    </section>
+
+
+    <section class="podio" id="podio">
+
+        <p>
+            Carregando ranking...
+        </p>
+
+    </section>
+
+
+    <div class="atualizacao-ranking">
+
+        <span class="indicador"></span>
+
+        Ranking atualizado em tempo real
+
+    </div>
+
+
+    <a
+        href="evento.html"
+        class="botao voltar"
+    >
+        VOLTAR PARA A GALERIA
+    </a>
+
+</main>
+
+
+<script>
+
+    // ======================================
+    // CONEXÃO COM SUPABASE
+    // ======================================
+
+    const SUPABASE_URL =
+        "https://elxcbmookggmwxsntbaq.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_7u7sDnFVjDMxGAYM6bYM0Q_1FoAN8VY";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    // ======================================
+    // CARREGAR RANKING
+    // ======================================
+
+    async function carregarRanking() {
+
+        const podio =
+            document.getElementById("podio");
+
+        try {
+
+            const { data, error } =
+                await supabaseClient
+                    .rpc("obter_ranking_atual");
+
+
+            if (error) {
+
+                console.error(
+                    "Erro ao carregar ranking:",
+                    error
+                );
+
+                podio.innerHTML = `
+                    <p>
+                        Não foi possível carregar o ranking.
+                    </p>
+                `;
+
+                return;
+            }
+
+
+            if (!data || data.length === 0) {
+
+                podio.innerHTML = `
+                    <p>
+                        Ainda não há fotos registradas nesta competição.
+                    </p>
+                `;
+
+                return;
+            }
+
+
+            podio.innerHTML = "";
+
+
+            const colocacoes = [
+                {
+                    classe: "segundo",
+                    medalha: "🥈",
+                    posicao: "2º"
+                },
+                {
+                    classe: "primeiro",
+                    medalha: "🥇",
+                    posicao: "1º"
+                },
+                {
+                    classe: "terceiro",
+                    medalha: "🥉",
+                    posicao: "3º"
+                }
+            ];
+
+
+            // O primeiro colocado deve aparecer no centro.
+            const ordemExibicao = [
+                data[1],
+                data[0],
+                data[2]
+            ];
+
+
+            for (
+                let i = 0;
+                i < ordemExibicao.length;
+                i++
+            ) {
+
+                const participante =
+                    ordemExibicao[i];
+
+                if (!participante) {
+                    continue;
+                }
+
+
+                const info =
+                    colocacoes[i];
+
+
+                const div =
+                    document.createElement("div");
+
+                div.className =
+                    `colocacao ${info.classe}`;
+
+
+                div.innerHTML = `
+
+                    <span class="medalha">
+                        ${info.medalha}
+                    </span>
+
+                    <span class="posicao">
+                        ${info.posicao}
+                    </span>
+
+                    <h2>
+                        ${participante.nome}
+                    </h2>
+
+                    <p>
+                        ${participante.escola}
+                    </p>
+
+                    <strong>
+                        ${participante.quantidade_fotos}
+                        ${
+                            participante.quantidade_fotos === 1
+                                ? "foto"
+                                : "fotos"
+                        }
+                    </strong>
+
+                `;
+
+
+                podio.appendChild(div);
+
+            }
+
+        } catch (erro) {
+
+            console.error(
+                "Erro inesperado no ranking:",
+                erro
+            );
+
+            podio.innerHTML = `
+                <p>
+                    Ocorreu um erro ao carregar o ranking.
+                </p>
+            `;
+        }
+
+    }
+
+
+    // ======================================
+    // INICIAR
+    // ======================================
+
+    carregarRanking();
+
+
+    // ======================================
+    // ATUALIZAR PERIODICAMENTE
+    // ======================================
+
+    setInterval(
+        carregarRanking,
+        5000
+    );
+
+</script>
+```
+
+</body>
+
+</html>
